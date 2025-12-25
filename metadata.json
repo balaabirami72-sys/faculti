@@ -1,0 +1,7 @@
+{
+  "name": "AcademiaTrack - Smart Faculty Tracker",
+  "description": "A real-time faculty presence tracking system with privacy-first status reporting and AI-powered scheduling assistance.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
