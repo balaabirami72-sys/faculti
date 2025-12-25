@@ -2,6 +2,7 @@
 import React, { useState, useMemo } from 'react';
 import { FacultyMember } from '../types';
 import FacultyCard from './FacultyCard';
+import FacultyProfileModal from './FacultyProfileModal';
 import { Search, Filter, RefreshCw, Layers } from 'lucide-react';
 
 interface StudentDashboardProps {
@@ -13,6 +14,7 @@ interface StudentDashboardProps {
 const StudentDashboard: React.FC<StudentDashboardProps> = ({ faculty, onSimulate, isSimulating }) => {
   const [search, setSearch] = useState('');
   const [deptFilter, setDeptFilter] = useState('All');
+  const [selectedFaculty, setSelectedFaculty] = useState<FacultyMember | null>(null);
 
   const departments = useMemo(() => {
     const depts = new Set(faculty.map(f => f.department));
@@ -27,6 +29,14 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ faculty, onSimulate
       return matchesSearch && matchesDept;
     });
   }, [faculty, search, deptFilter]);
+
+  const handleViewProfile = (f: FacultyMember) => {
+    setSelectedFaculty(f);
+  };
+
+  const handleCloseProfile = () => {
+    setSelectedFaculty(null);
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -87,7 +97,11 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ faculty, onSimulate
       {filteredFaculty.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredFaculty.map(f => (
-            <FacultyCard key={f.id} faculty={f} />
+            <FacultyCard 
+              key={f.id} 
+              faculty={f} 
+              onViewProfile={handleViewProfile}
+            />
           ))}
         </div>
       ) : (
@@ -97,6 +111,12 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ faculty, onSimulate
           <p className="text-slate-500">Try adjusting your search or filters.</p>
         </div>
       )}
+
+      {/* Profile Modal Overlay */}
+      <FacultyProfileModal 
+        faculty={selectedFaculty} 
+        onClose={handleCloseProfile} 
+      />
     </div>
   );
 };
