@@ -1,8 +1,8 @@
 
 import React from 'react';
-import { FacultyMember, Status } from '../types';
-import { ZONE_STATUS_MAP } from '../constants';
-import StatusBadge from './StatusBadge';
+import { FacultyMember, Status } from '../types.ts';
+import { ZONE_STATUS_MAP } from '../constants.ts';
+import StatusBadge from './StatusBadge.tsx';
 import { X, Mail, Calendar, MapPin, MessageSquare, Clock, GraduationCap } from 'lucide-react';
 
 interface FacultyProfileModalProps {
@@ -22,13 +22,11 @@ const FacultyProfileModal: React.FC<FacultyProfileModalProps> = ({ faculty, onCl
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-6">
-      {/* Backdrop */}
       <div 
         className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"
         onClick={onClose}
       />
       
-      {/* Modal Container */}
       <div className="relative bg-white w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300">
         <button 
           onClick={onClose}
@@ -37,7 +35,6 @@ const FacultyProfileModal: React.FC<FacultyProfileModalProps> = ({ faculty, onCl
           <X size={20} />
         </button>
 
-        {/* Header/Cover */}
         <div className="bg-indigo-600 h-32 sm:h-40 relative">
           <div className="absolute -bottom-16 left-8 p-1.5 bg-white rounded-2xl shadow-xl">
             <img 
@@ -48,7 +45,6 @@ const FacultyProfileModal: React.FC<FacultyProfileModalProps> = ({ faculty, onCl
           </div>
         </div>
 
-        {/* Content */}
         <div className="pt-20 pb-8 px-8">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
@@ -60,19 +56,18 @@ const FacultyProfileModal: React.FC<FacultyProfileModalProps> = ({ faculty, onCl
             </div>
             <div className="flex flex-col items-start sm:items-end gap-2">
               <StatusBadge status={status} />
-              <span className="text-[10px] text-slate-400 font-mono">
-                LAST UPDATED: {new Date(faculty.lastUpdated).toLocaleTimeString()}
+              <span className="text-[10px] text-slate-400 font-mono text-right">
+                LAST UPDATED:<br/>{new Date(faculty.lastUpdated).toLocaleTimeString()}
               </span>
             </div>
           </div>
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Left Column: Info */}
             <div className="space-y-6">
               <section>
                 <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Contact Information</h3>
                 <div className="space-y-3">
-                  <div className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100 hover:border-indigo-200 transition-colors cursor-pointer">
+                  <div className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100">
                     <div className="p-2 bg-indigo-100 text-indigo-600 rounded-lg">
                       <Mail size={18} />
                     </div>
@@ -81,10 +76,6 @@ const FacultyProfileModal: React.FC<FacultyProfileModalProps> = ({ faculty, onCl
                       <p className="text-sm font-medium text-slate-700 truncate">{faculty.email}</p>
                     </div>
                   </div>
-                  <button className="w-full flex items-center justify-center gap-2 p-3 bg-indigo-600 text-white rounded-xl font-semibold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-100">
-                    <MessageSquare size={18} />
-                    Send Message
-                  </button>
                 </div>
               </section>
 
@@ -93,13 +84,12 @@ const FacultyProfileModal: React.FC<FacultyProfileModalProps> = ({ faculty, onCl
                 <div className="p-4 bg-amber-50 rounded-xl border border-amber-100 flex items-start gap-3">
                   <MapPin size={18} className="text-amber-600 mt-0.5" />
                   <p className="text-xs text-amber-800 leading-relaxed">
-                    Specific room details are hidden for privacy. The status <strong>"{status}"</strong> reflects real-time activity based on campus zones.
+                    Specific room details are hidden for privacy. Status reflects real-time campus activity.
                   </p>
                 </div>
               </section>
             </div>
 
-            {/* Right Column: Schedule/Office Hours */}
             <div className="space-y-6">
               <section>
                 <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">General Availability</h3>
@@ -109,13 +99,6 @@ const FacultyProfileModal: React.FC<FacultyProfileModalProps> = ({ faculty, onCl
                     <div className="text-sm">
                       <p className="font-semibold text-slate-700">Office Hours</p>
                       <p className="text-slate-500">Mon/Wed: 2:00 PM - 4:00 PM</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Calendar size={16} className="text-slate-400" />
-                    <div className="text-sm">
-                      <p className="font-semibold text-slate-700">Next Class</p>
-                      <p className="text-slate-500">Tomorrow at 10:00 AM</p>
                     </div>
                   </div>
                 </div>

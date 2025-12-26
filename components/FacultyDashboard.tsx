@@ -1,8 +1,8 @@
 
 import React from 'react';
-import { FacultyMember, Status } from '../types';
-import { ZONE_STATUS_MAP } from '../constants';
-import StatusBadge from './StatusBadge';
+import { FacultyMember, Status } from '../types.ts';
+import { ZONE_STATUS_MAP } from '../constants.ts';
+import StatusBadge from './StatusBadge.tsx';
 import { Shield, Eye, MapPin, Power, Lock } from 'lucide-react';
 
 interface FacultyDashboardProps {
@@ -40,7 +40,6 @@ const FacultyDashboard: React.FC<FacultyDashboardProps> = ({ faculty, onToggleDN
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
-            {/* Control Panel */}
             <div className="space-y-6">
               <h2 className="text-sm font-bold text-slate-400 uppercase tracking-wider flex items-center">
                 <Shield size={16} className="mr-2" />
@@ -64,31 +63,12 @@ const FacultyDashboard: React.FC<FacultyDashboardProps> = ({ faculty, onToggleDN
                 <div className="mt-4 p-3 bg-indigo-50 rounded-lg border border-indigo-100 flex items-start gap-3">
                   <Lock size={16} className="text-indigo-600 mt-0.5" />
                   <p className="text-xs text-indigo-700 leading-relaxed">
-                    <strong>Privacy Rule Active:</strong> Students only see your general status (e.g., "In Class"). Exact location and movement logs are strictly restricted to campus administration.
+                    <strong>Privacy Rule Active:</strong> Students only see your general status. Exact location logs are strictly restricted to administration.
                   </p>
-                </div>
-              </div>
-
-              <div className="p-6 rounded-xl border border-slate-200 bg-white">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-emerald-100 text-emerald-600 rounded-lg">
-                      <Power size={20} />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-slate-900">Active Tracking</h3>
-                      <p className="text-xs text-slate-500">Live zone detection enabled</p>
-                    </div>
-                  </div>
-                  <span className="flex h-3 w-3 relative">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-                  </span>
                 </div>
               </div>
             </div>
 
-            {/* Current State */}
             <div className="space-y-6">
               <h2 className="text-sm font-bold text-slate-400 uppercase tracking-wider flex items-center">
                 <Eye size={16} className="mr-2" />
@@ -114,27 +94,9 @@ const FacultyDashboard: React.FC<FacultyDashboardProps> = ({ faculty, onToggleDN
                         {faculty.currentZone}
                       </div>
                     </div>
-                    
-                    <div>
-                      <span className="text-slate-500 text-[10px] uppercase font-bold block mb-1">Status Output</span>
-                      <div className="inline-block px-3 py-1 rounded bg-slate-800 border border-slate-700 text-sm font-mono text-emerald-400">
-                        {currentStatus}
-                      </div>
-                    </div>
-
-                    <div className="pt-4 border-t border-slate-800 mt-4">
-                      <div className="flex justify-between text-xs text-slate-500">
-                        <span>Last Sensor Sync:</span>
-                        <span>{new Date().toLocaleTimeString()}</span>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
-              
-              <p className="text-xs text-slate-400 italic text-center">
-                Auto-syncing with campus IoT gateway...
-              </p>
             </div>
           </div>
         </div>

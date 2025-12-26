@@ -1,10 +1,10 @@
-//my app at the end of a line
-import React, { useState, useEffect, useCallback } from 'react';
+
+import React, { useState, useCallback } from 'react';
 import { User, Users, ShieldCheck, LayoutDashboard, Settings } from 'lucide-react';
-import { FacultyMember, Zone } from './types';
-import { INITIAL_FACULTY, ZONES } from './constants';
-import StudentDashboard from './components/StudentDashboard';
-import FacultyDashboard from './components/FacultyDashboard';
+import { FacultyMember } from './types.ts';
+import { INITIAL_FACULTY, ZONES } from './constants.ts';
+import StudentDashboard from './components/StudentDashboard.tsx';
+import FacultyDashboard from './components/FacultyDashboard.tsx';
 
 const App: React.FC = () => {
   const [faculty, setFaculty] = useState<FacultyMember[]>(INITIAL_FACULTY);
@@ -15,10 +15,8 @@ const App: React.FC = () => {
   const simulateMovement = useCallback(() => {
     setIsSimulating(true);
     
-    // Simulate multiple movements over a few seconds
     const interval = setInterval(() => {
       setFaculty(prev => prev.map(f => {
-        // Only move about 40% of faculty at each tick
         if (Math.random() > 0.4) return f;
         
         const randomZoneIndex = Math.floor(Math.random() * ZONES.length);
@@ -32,7 +30,6 @@ const App: React.FC = () => {
       }));
     }, 2000);
 
-    // Stop simulation after 6 seconds
     setTimeout(() => {
       clearInterval(interval);
       setIsSimulating(false);
@@ -52,7 +49,6 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Navigation Header */}
       <header className="bg-white border-b border-slate-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
@@ -103,7 +99,6 @@ const App: React.FC = () => {
         </div>
       </header>
 
-      {/* Main Content Area */}
       <main className="flex-1 bg-slate-50">
         {activeTab === 'student' ? (
           <StudentDashboard 
@@ -119,7 +114,6 @@ const App: React.FC = () => {
         )}
       </main>
 
-      {/* Footer */}
       <footer className="bg-white border-t border-slate-200 py-6">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <p className="text-slate-400 text-xs">
@@ -127,24 +121,6 @@ const App: React.FC = () => {
           </p>
         </div>
       </footer>
-
-      {/* Mobile Bottom Navigation */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 flex justify-around items-center h-16 px-4 z-50">
-        <button 
-          onClick={() => setActiveTab('student')}
-          className={`flex flex-col items-center justify-center space-y-1 ${activeTab === 'student' ? 'text-indigo-600' : 'text-slate-400'}`}
-        >
-          <LayoutDashboard size={20} />
-          <span className="text-[10px] font-bold uppercase tracking-widest">Directory</span>
-        </button>
-        <button 
-          onClick={() => setActiveTab('faculty')}
-          className={`flex flex-col items-center justify-center space-y-1 ${activeTab === 'faculty' ? 'text-indigo-600' : 'text-slate-400'}`}
-        >
-          <User size={20} />
-          <span className="text-[10px] font-bold uppercase tracking-widest">My Status</span>
-        </button>
-      </div>
     </div>
   );
 };

@@ -1,8 +1,8 @@
 
 import React, { useState, useMemo } from 'react';
-import { FacultyMember } from '../types';
-import FacultyCard from './FacultyCard';
-import FacultyProfileModal from './FacultyProfileModal';
+import { FacultyMember } from '../types.ts';
+import FacultyCard from './FacultyCard.tsx';
+import FacultyProfileModal from './FacultyProfileModal.tsx';
 import { Search, Filter, RefreshCw, Layers } from 'lucide-react';
 
 interface StudentDashboardProps {
@@ -112,7 +112,6 @@ const StudentDashboard: React.FC<StudentDashboardProps> = ({ faculty, onSimulate
         </div>
       )}
 
-      {/* Profile Modal Overlay */}
       <FacultyProfileModal 
         faculty={selectedFaculty} 
         onClose={handleCloseProfile} 

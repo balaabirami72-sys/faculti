@@ -1,5 +1,5 @@
 
-import { Status, Zone, FacultyMember } from './types';
+import { Status, Zone, FacultyMember } from './types.ts';
 
 export const ZONE_STATUS_MAP: Record<Zone, Status> = {
   'Staff Room': Status.AVAILABLE,

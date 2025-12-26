@@ -1,8 +1,8 @@
 
 import React from 'react';
-import { FacultyMember, Status } from '../types';
-import { ZONE_STATUS_MAP } from '../constants';
-import StatusBadge from './StatusBadge';
+import { FacultyMember, Status } from '../types.ts';
+import { ZONE_STATUS_MAP } from '../constants.ts';
+import StatusBadge from './StatusBadge.tsx';
 import { Mail, ChevronRight } from 'lucide-react';
 
 interface FacultyCardProps {

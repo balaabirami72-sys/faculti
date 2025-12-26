@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Status } from '../types';
+import { Status } from '../types.ts';
 import { CheckCircle2, Clock, Ban, MinusCircle, HelpCircle } from 'lucide-react';
 
 interface StatusBadgeProps {
